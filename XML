@@ -1,0 +1,123 @@
+Here is the dump for the tables:
+
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE User (
+userID INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL
+);
+CREATE TABLE Review (
+reviewID INTEGER PRIMARY KEY AUTOINCREMENT,
+userID INTEGER NOT NULL,
+restaurantID INTEGER NOT NULL,
+rating INTEGER NOT NULL,
+comment TEXT,
+FOREIGN KEY (userID) REFERENCES User (userID),
+FOREIGN KEY (restaurantID) REFERENCES Restaurant (restaurantID)
+);
+CREATE TABLE Restaurant (
+restaurantID INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL,
+phone VARCHAR(255),
+website VARCHAR(255),
+locationID INTEGER NOT NULL,
+FOREIGN KEY (locationID) REFERENCES Location (locationID)
+);
+CREATE TABLE Cuisine (
+cuisineID INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR(255) NOT NULL
+);
+CREATE TABLE RestaurantCuisine (
+restaurantID INTEGER NOT NULL,
+cuisineID INTEGER NOT NULL,
+PRIMARY KEY (restaurantID, cuisineID),
+FOREIGN KEY (restaurantID) REFERENCES Restaurant (restaurantID),
+FOREIGN KEY (cuisineID) REFERENCES Cuisine (cuisineID)
+);
+CREATE TABLE Location (
+locationID INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL
+);
+COMMIT;
+
+
+XML:
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <!-- Restaurant table -->
+  <xs:element name="Restaurant">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:integer"/>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="cuisine_id" type="xs:integer"/>
+        <xs:element name="address" type="xs:string"/>
+        <xs:element name="latitude" type="xs:decimal"/>
+        <xs:element name="longitude" type="xs:decimal"/>
+        <xs:element name="rating" type="xs:decimal"/>
+        <xs:element name="price_range" type="xs:string" minOccurs="0"/>
+        <xs:element name="is_open" type="xs:boolean"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Cuisine table -->
+  <xs:element name="Cuisine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:integer"/>
+        <xs:element name="name" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Location table -->
+  <xs:element name="Location">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:integer"/>
+        <xs:element name="restaurant_id" type="xs:integer"/>
+        <xs:element name="city" type="xs:string"/>
+        <xs:element name="state" type="xs:string"/>
+        <xs:element name="country" type="xs:string"/>
+        <xs:element name="zipcode" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+
+This XML schema defines the structure of the Restaurant, Cuisine, and Location tables, including the data types for each column. The minOccurs="0" attribute for the price_range element indicates that this column is optional.
+
+Here's an example XML instance document for the Restaurant table:
+
+<Restaurants>
+  <Restaurant>
+    <id>1</id>
+    <name>Restaurant A</name>
+    <cuisine_id>1</cuisine_id>
+    <address>123 Main St</address>
+    <latitude>37.7749</latitude>
+    <longitude>-122.4194</longitude>
+    <rating>4.5</rating>
+    <price_range>$$$</price_range>
+    <is_open>true</is_open>
+  </Restaurant>
+  <Restaurant>
+    <id>2</id>
+    <name>Restaurant B</name>
+    <cuisine_id>2</cuisine_id>
+    <address>456 1st Ave</address>
+    <latitude>37.7879</latitude>
+    <longitude>-122.4075</longitude>
+    <rating>3.8</rating>
+    <price_range>$$</price_range>
+    <is_open>true</is_open>
+  </Restaurant>
+  <!-- ... -->
+</Restaurants>
