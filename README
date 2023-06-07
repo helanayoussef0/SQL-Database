@@ -1,0 +1,61 @@
+Table Descriptions:
+User - This table stores information about users. Each user is assigned a unique userID which is the primary
+key of this table. The name, email, and password of the user are also stored in this table.
+Review - This table stores information about reviews. Each review is assigned a unique reviewID which is the
+primary key of this table. The userID and restaurantID columns are foreign keys that reference the
+corresponding User and Restaurant tables. The rating and comment columns store the review's rating and
+comment.
+Restaurant - This table stores information about restaurants. Each restaurant is assigned a unique
+restaurantID which is the primary key of this table. The name, address, phone number, website, and
+locationID columns are used to store the restaurant's name, address, contact details, and location. The
+locationID column is a foreign key that references the corresponding Location table.
+Cuisine - This table stores information about cuisines. Each cuisine is assigned a unique cuisineID which is the
+primary key of this table. The name column is used to store the cuisine's name.
+RestaurantCuisine - This table represents the many-to-many relationship between the Restaurant and
+Cuisine entities. It stores the restaurantID and cuisineID columns, which are foreign keys that reference the
+corresponding Restaurant and Cuisine tables, respectively.
+Location - This table stores information about locations. Each location is assigned a unique locationID which
+is the primary key of this table. The name and address columns are used to store the location's name and
+address.
+These tables are related to the ER design as follows:
+User and Review tables are related to the User entity.
+Review and Restaurant tables are related to the Review entity.
+Restaurant and RestaurantCuisine tables are related to the Restaurant entity.
+Cuisine and RestaurantCuisine tables are related to the Cuisine entity.
+Restaurant and Location tables are related to the Location entity.
+
+ERD Diagram:
+
+Here is a short description for each entity, attribute, and relationship:
+Entities:
+1. User: Represents the users of the restaurant finder app.
+2. Restaurant: Represents the restaurants that can be searched for and reviewed by users.
+3. Cuisine: Represents the different types of food served by the restaurants.
+4. Location: Represents the geographical locations of the restaurants.
+5. Review: Represents the user reviews for the restaurants.
+
+Attributes:
+1. User: id (unique identifier), username (username of the user), email (email of the user), password
+(password of the user)
+2. Restaurant: id (unique identifier), name (name of the restaurant), address (address of the restaurant),
+phone (phone number of the restaurant), rating (average rating of the restaurant), price_range (price
+range of the restaurant), hours_of_operation (hours of operation of the restaurant), image_url (image
+URL of the restaurant)
+3. Cuisine: id (unique identifier), name (name of the cuisine)
+4. Location: id (unique identifier), name (name of the location), lat (latitude of the location), long
+(longitude of the location)
+5. Review: id (unique identifier), user_id (id of the user who wrote the review), restaurant_id (id of the
+restaurant being reviewed), rating (rating given by the user), comment (comment written by the
+user), date (date of the review)
+
+Relationships:
+1. One-to-many: Represents a one-to-many relationship between User and Review, meaning one user
+can have multiple reviews but each review belongs to only one user.
+2. Many-to-one: Represents a many-to-one relationship between Review and Restaurant, meaning
+multiple reviews can belong to one restaurant but each review belongs to only one restaurant.
+3. Many-to-many: Represents a many-to-many relationship between Restaurant and Cuisine, meaning a
+restaurant can serve multiple cuisines and a cuisine can be served by multiple restaurants.
+4. One-to-one: Represents a one-to-one relationship between Restaurant and Location, meaning each
+restaurant is located in one location and each location has only one restaurant.
+5. One-to-many: Represents a one-to-many relationship between Location and Restaurant, meaning one
+location can have multiple restaurants but each restaurant is located in only one location.
