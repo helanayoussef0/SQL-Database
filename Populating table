@@ -1,0 +1,104 @@
+-- Table: Restaurant
+CREATE TABLE Restaurant (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  cuisine_id INTEGER NOT NULL,
+  address TEXT NOT NULL,
+  latitude REAL NOT NULL,
+  longitude REAL NOT NULL,
+  rating REAL DEFAULT 0,
+  price_range TEXT DEFAULT NULL,
+  is_open INTEGER DEFAULT 0
+);
+
+-- Sample data for Restaurant
+INSERT INTO Restaurant (name, cuisine_id, address, latitude, longitude, rating, price_range, is_open)
+VALUES 
+("Restaurant A", 1, "123 Main St", 37.7749, -122.4194, 4.5, "$$$", 1),
+("Restaurant B", 2, "456 1st Ave", 37.7879, -122.4075, 3.8, "$$", 1),
+("Restaurant C", 3, "789 2nd St", 37.7816, -122.4114, 4.2, "$$", 0),
+("Restaurant D", 1, "101 Market St", 37.7934, -122.3980, 4.8, "$$$", 1),
+("Restaurant E", 2, "234 Mission St", 37.7891, -122.4019, 3.6, "$$", 1),
+("Restaurant F", 3, "567 Howard St", 37.7873, -122.3994, 4.1, "$$$", 0),
+("Restaurant G", 1, "890 Folsom St", 37.7815, -122.4035, 4.4, "$$", 1),
+("Restaurant H", 2, "123 3rd St", 37.7838, -122.4029, 3.9, "$", 1),
+("Restaurant I", 3, "456 Howard St", 37.7876, -122.3999, 4.3, "$$$", 0),
+("Restaurant J", 1, "789 4th St", 37.7809, -122.3948, 4.0, "$$", 1);
+
+-- Table: Cuisine
+CREATE TABLE Cuisine (
+  id INTEGER PRIMARY KEY,
+  name TEXT NOT NULL
+);
+
+-- Sample data for Cuisine
+INSERT INTO Cuisine (name)
+VALUES 
+("Italian"),
+("Mexican"),
+("Japanese"),
+("Chinese"),
+("Indian"),
+("French"),
+("Thai"),
+("Greek"),
+("Mediterranean"),
+("American");
+
+-- Table: Location
+CREATE TABLE Location (
+id INTEGER PRIMARY KEY,
+restaurant_id INTEGER NOT NULL,
+city TEXT NOT NULL,
+state TEXT NOT NULL,
+country TEXT NOT NULL,
+zipcode TEXT NOT NULL
+);
+
+-- Sample data for Location
+INSERT INTO Location (restaurant_id, city, state, country, zipcode)
+VALUES
+(1, "San Francisco", "CA", "USA", "94102"),
+(2, "San Francisco", "CA", "USA", "94103"),
+(3, "San Francisco", "CA", "USA", "94104"),
+(4, "San Francisco", "CA", "USA", "94105"),
+(5, "San Francisco", "CA", "USA", "94107"),
+(6, "San Francisco", "CA", "USA", "94108"),
+(7, "San Francisco", "CA", "USA", "94109"),
+(8, "San Francisco", "CA", "USA", "94110"),
+(9, "San Francisco", "CA", "USA", "94111"),
+(10, "San Francisco", "CA", "USA", "94112");
+
+-- Table: Review
+CREATE TABLE Review (
+id INTEGER PRIMARY KEY,
+restaurant_id INTEGER NOT NULL,
+user_id INTEGER NOT NULL,
+rating INTEGER NOT NULL,
+comment TEXT DEFAULT NULL,
+date_posted TEXT NOT NULL
+);
+
+-- Sample data for Review
+INSERT INTO Review (restaurant_id, user_id, rating, comment, date_posted)
+VALUES
+(1, 1, 5, "Great food and service!", "2022-02-01"),
+(1, 2, 4, "Decent Italian food", "2022-01-30"),
+(2, 3, 3, "Average Mexican food", "2022-01-28"),
+(2, 4, 4, "Good atmosphere", "2022-01-26"),
+(3, 5, 5, "Best sushi in town!", "2022-01-25"),
+(3, 6, 4, "Fresh and delicious", "2022-01-23"),
+(4, 7, 4, "Great views and cocktails", "2022-01-21"),
+(4, 8, 5, "Amazing food and service", "2022-01-19"),
+(5, 9, 3, "Decent Chinese food", "2022-01-17"),
+(5, 10, 2, "Disappointing experience", "2022-01-15"),
+(6, 1, 4, "Great French food and wine", "2022-01-13"),
+(6, 2, 5, "Authentic and delicious", "2022-01-11"),
+(7, 3, 3, "Average Thai food", "2022-01-09"),
+(7, 4, 4, "Good value for money", "2022-01-07"),
+(8, 5, 5, "Amazing Greek food", "2022-01-05"),
+(8, 6, 4, "Friendly staff and atmosphere", "2022-01-03"),
+(9, 7, 4, "Good Mediterranean food", "2022-01-01"),
+(9, 8, 5, "Best falafel in town!", "2021-12-30"),
+(10, 9, 3, "Decent American food", "2021-12-28"),
+(10, 10, 2, "Overpriced and underwhelming", "2021-12-28");
